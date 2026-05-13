@@ -1,5 +1,6 @@
 bin/
 obj/
+.github
 .vs
 .vscode/
 *.db
