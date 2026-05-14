@@ -1,4 +1,5 @@
 using Server.Data;
+using Server.Extensions;
 using Server.Routes;
 using Server.Services;
 
@@ -15,13 +16,16 @@ builder.Services.AddCors(options =>
     });
 });
 
-
+builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.UseAuthentication(); 
+app.UseAuthorization();
 
 app.UseCors("AllowFrontend");
 
