@@ -22,7 +22,6 @@ export function Login() {
 			console.log(response.data.token);
 
 		} catch (error: any) {
-			// O Axios joga erros (401, 404, 500) direto para o catch
 			if (error.response) {
 				alert("Credenciais inválidas ou erro no servidor.");
 			} else {
