@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
+using Server.Helpers;
 using Server.Models;
 
 namespace Server.Services;
@@ -9,7 +10,7 @@ public class UserService(AppDbContext context)
     public UserModel CreateUser(SignupRequest request)
     {
         (string username, string email, string password) = request;
-        string encryptedPassword = EncryptPasswordService.EncryptPassword(password);
+        string encryptedPassword = PasswordHasher.Hash(password);
             
         var user = new UserModel(username, email, encryptedPassword);
         
@@ -28,7 +29,7 @@ public class UserService(AppDbContext context)
 
         var user = await context.Users.FirstOrDefaultAsync(x => x.Username == identifier || x.Email == identifier);
 
-        if (user is null || !EncryptPasswordService.VerifyPassword(password, user.Password))
+        if (user is null || !PasswordHasher.Verify(password, user.Password))
         {
             return null;
         }

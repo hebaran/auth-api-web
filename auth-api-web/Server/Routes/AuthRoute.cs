@@ -9,11 +9,11 @@ public static class AuthRoute
     {
         var authRoute = app.MapGroup("/auth");
 
-        authRoute.MapPost("/login", async (LoginRequest request, UserService userService) =>
+        authRoute.MapPost("/login", async (LoginRequest request, UserService userService, AuthService authService) =>
         {
             var user = await userService.GetUserByRequest(request);
 
-            return user is not null ? Results.Ok("JWT") : Results.Unauthorized();
+            return user is not null ? Results.Ok(authService.JwtGenerate(user.Username, user.Id)) : Results.Unauthorized();
         });
     }
 }
