@@ -7,7 +7,7 @@ export function Input({ className, ...props }: InputProps) {
   return (
     <input
       {...props}
-      className={`w-full h-10 pl-3 bg-[#0d1117] border border-[#3D444D] rounded-md outline-none 
+      className={`w-full h-10 pl-3 bg-[#FFFFFF00] border border-[#3D444D] rounded-md outline-none 
                  focus:ring-1 focus:ring-inset focus:ring-[#2f81f7] focus:border-[#2f81f7] 
                  ${className || ""}`}
     />

@@ -9,11 +9,20 @@ public static class AuthRoute
     {
         var authRoute = app.MapGroup("/auth");
 
-        authRoute.MapPost("/login", async (LoginRequest request, UserService userService, AuthService authService) =>
+        authRoute.MapPost("/login", async (HttpContext context, LoginRequest request, UserService userService, AuthService authService) =>
         {
             var user = await userService.GetUserByRequest(request);
 
-            return user is not null ? Results.Ok(authService.JwtGenerate(user.Username, user.Id)) : Results.Unauthorized();
+            if (user is null)
+            {
+                return Results.Unauthorized();
+            }
+
+            var jwt = authService.JwtGenerate(user.Username, user.Id);
+
+            context.Response.Cookies.Append("authToken", jwt.Token, new CookieOptions { HttpOnly = true, Secure = false, SameSite = SameSiteMode.Strict, Expires = jwt.Expiration }); // https: Secure = true
+
+            return Results.Ok(new { message = "Login realizado" });
         });
     }
 }

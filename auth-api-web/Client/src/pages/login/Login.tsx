@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Input } from "../../components/Input";
 import { ButtonSubmit } from "../../components/ButtonSubmit";
 import logoVunoa from "../../assets/logo/vunoa-logo.png";
+import { CustomLink } from "../../components/CustomLink";
 
 export function Login() {
 
@@ -17,15 +18,17 @@ export function Login() {
 			const response = await api.post("/auth/login", {
 				identifier,
 				password
+			}, {
+				withCredentials: true
 			});
 
-			console.log(response.data.token);
+			console.log(response);
 
 		} catch (error: any) {
 			if (error.response) {
-				alert("Credenciais inválidas ou erro no servidor.");
+				console.log("Credenciais inválidas ou erro no servidor.");
 			} else {
-				alert("Não foi possível conectar ao servidor C#.");
+				console.log("Não foi possível conectar ao servidor C#.");
 			}
 		}
 	}
@@ -46,16 +49,14 @@ export function Login() {
 						<label htmlFor="password" className="font-semibold">
 							Senha
 						</label>
-						<a href="#" className="text-[#4493F8] hover:underline">
-							Esqueceu sua senha?
-						</a>
+						<CustomLink to="/" className="text-[#4493F8] hover:underline">Esqueceu sua senha?</CustomLink>
 					</div>
 					<Input value={password} onChange={(e) => setPassword(e.target.value)} type="password" id="password" />
 				</div>
 				<ButtonSubmit>Entrar</ButtonSubmit>
 			</form>
 			<section className="mt-5">
-				<span>Novo no Vunoa? <a href="" className="text-[#4493F8] hover:underline">Crie uma conta</a></span>
+				<span>Novo no Vunoa? <CustomLink to="/register" className="text-[#4493F8] hover:underline">Crie uma conta</CustomLink></span>
 			</section>
 		</div>
 	)
