@@ -6,13 +6,15 @@
     <link rel="shortcut icon" href="../../assets/images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../../styles/reset.css">
     <link rel="stylesheet" href="../../styles/base.css">
+    <link rel="stylesheet" href="../../styles/theme.css">
     <link rel="stylesheet" href="./login.css">
     <title>Vunoa &middot; Login</title>
 </head>
 <body>
     <div class="container">
         <header>
-            <img id="header-logo" src="../../assets/images/logo-black.png" alt="Logo Vunoa">
+            <img class="header-logo logo-dark" src="../../assets/images/logo-dark.png" alt="Logo Vunoa Dark">
+            <img class="header-logo logo-light" src="../../assets/images/logo-light.png" alt="Logo Vunoa Light">
             <h1>Entre no Vunoa</h1>
         </header>
         <main>
@@ -28,7 +30,11 @@
                     </div>
                     <input type="password" id="password">
                 </div>
+                <button id="submit-button" type="submit">Entrar</button>
             </form>
+            <div class="signup-prompt">
+                <p>Novo no Vunoa? <a href="#">Crie uma conta</a></p>
+            </div>
         </main>
         <footer>
         </footer>
