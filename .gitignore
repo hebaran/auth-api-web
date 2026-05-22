@@ -1,0 +1,11 @@
+bin/
+obj/
+.github
+.vs
+.vscode/
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
